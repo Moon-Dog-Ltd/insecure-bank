@@ -22,8 +22,7 @@ ADD start.sh /usr/local/tomcat/
 # Copy the application to tomcat
 ADD target/insecure-bank.war /usr/local/tomcat/webapps
 
-# Copy the license file
-ADD license.hdiv /usr/local/tomcat/hdiv/
+
 
 
 # Run Tomcat and enjoy!

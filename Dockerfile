@@ -13,9 +13,9 @@ LABEL maintainer="Hdiv Security"
 RUN mkdir -p /usr/local/tomcat/
 
 WORKDIR /usr/local/tomcat
-RUN wget --no-check-certificate http://dlcdn.apache.org/tomcat/tomcat-8/v8.5.73/bin/apache-tomcat-8.5.73.tar.gz
-RUN tar xvfz apache*.tar.gz
-RUN mv apache-tomcat-8.5.73/* /usr/local/tomcat/.
+#RUN wget --no-check-certificate http://dlcdn.apache.org/tomcat/tomcat-8/v8.5.73/bin/apache-tomcat-8.5.73.tar.gz
+#RUN tar xvfz apache*.tar.gz
+#RUN mv apache-tomcat-8.5.73/* /usr/local/tomcat/.
 
 ADD start.sh /usr/local/tomcat/
 

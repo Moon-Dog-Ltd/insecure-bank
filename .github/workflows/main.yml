@@ -21,7 +21,7 @@ jobs:
 
       - name: Install Bridge CLI
         run: |
-          curl -L -o bridge-cli-bundle-linux64.zip https://repo.blackduck.com/bds-integrations-release/com/blackduck/integration/bridge/binaries/bridge-cli-bundle/latest/
+          curl -L -o bridge-cli-bundle-linux64.zip https://repo.blackduck.com/bds-integrations-release/com/blackduck/integration/bridge/binaries/bridge-cli-bundle/latest/bridge-cli-bundle-linux64.zip
           unzip bridge-cli-bundle-linux64.zip -d bridge
           chmod +x bridge/bridge
           echo "$GITHUB_WORKSPACE/bridge" >> $GITHUB_PATH

@@ -1,0 +1,43 @@
+name: Create Polaris Apps
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-polaris-apps:
+    runs-on: ubuntu-latest
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_ORG: Mood-Dog-Ltd
+      POLARIS_TOKEN: ${{ secrets.POLARIS_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Install Bridge CLI
+        run: |
+          curl -L -o bridge-cli-bundle-linux64.zip https:https://repo.blackduck.com/bds-integrations-release/com/blackduck/integration/bridge/binaries/bridge-cli-bundle/latest/
+          unzip bridge.zip -d bridge
+          chmod +x bridge/bridge
+          echo "$GITHUB_WORKSPACE/bridge" >> $GITHUB_PATH
+
+      - name: List GitHub Repos and Create Polaris Apps
+        run: |
+          echo "Fetching repositories from GitHub..."
+          REPOS=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            "https://api.github.com/orgs/$GITHUB_ORG/repos?per_page=100" | jq -r '.[].name')
+
+          for REPO in $REPOS; do
+            echo "Creating Polaris app for repo: $REPO"
+            bridge/bridge \
+              --project-name "$REPO" \
+              --branch-name "main" \
+              --token "$POLARIS_TOKEN" \
+              --upload \
+              --scan
+          done

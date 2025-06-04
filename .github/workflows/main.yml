@@ -34,7 +34,7 @@ jobs:
 
           for REPO in $REPOS; do
             echo "Creating Polaris app for repo: $REPO"
-            bridge/bridge \
+            bridge/bridge-cli-bundle-linux64 \
               --project-name "$REPO" \
               --branch-name "main" \
               --token "$POLARIS_TOKEN" \
